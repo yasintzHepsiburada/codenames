@@ -57,18 +57,25 @@ function getWordTypeByPosition(position, isRed) {
 }
 
 function buildGameConfig({ isRed, words: wordList, openedIndex }) {
+  const _words = wordList
+    .map((i) => i.split(',').map((i) => parseInt(i, 10)))
+    .map(([index, position]) => ({
+      text: words[index],
+      opened: openedIndex.indexOf(index) > -1,
+      type: getWordTypeByPosition(position, isRed),
+      index,
+      position,
+    }));
+
+  const isGameOver = _words.find(
+    (w) => w.type === WORD_TYPES.SNIPER && w.opened
+  );
+
   return {
     isRed,
-    words: wordList
-      .map((i) => i.split(',').map((i) => parseInt(i, 10)))
-      .map(([index, position]) => ({
-        text: words[index],
-        opened: openedIndex.indexOf(index) > -1,
-        type: getWordTypeByPosition(position, isRed),
-        index,
-        position,
-      })),
+    isGameOver,
+    words: _words,
   };
 }
 
-export { shuffle, generateRandomGame, buildGameConfig };
+export { shuffle, generateRandomGame, buildGameConfig, WORD_TYPES };

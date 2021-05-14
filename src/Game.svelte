@@ -1,4 +1,6 @@
 <script>
+  import { WORD_TYPES } from './utils';
+
   export let data;
   export let isKeyScreen;
   export let onWordClick = () => 0;
@@ -9,6 +11,7 @@
     <div
       class="word {word.type}"
       class:opened={word.opened}
+      class:hidden={word.type !== WORD_TYPES.SNIPER && data.isGameOver}
       class:detail={isKeyScreen}
       on:click={() => onWordClick(word)}
     >
@@ -76,5 +79,8 @@
 
   .sniper.opened {
     background-color: black;
+  }
+  .word.hidden {
+    opacity: 0.3;
   }
 </style>
