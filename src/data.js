@@ -2,7 +2,7 @@ import { derived, writable, get } from 'svelte/store';
 import { generateRandomGame, buildGameConfig } from './utils';
 
 const GAME_URL = 'https://api.npoint.io/9aa25654a04bb9f8393e';
-const gameId = window.location.pathname.replace('/', '') || 'main';
+const gameId = new URLSearchParams(window.location.search).get('id') || 'main';
 
 const _data = writable({});
 
