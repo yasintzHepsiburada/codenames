@@ -1,6 +1,19 @@
 <script>
-  import { data } from './data';
+  import { onMount } from 'svelte';
+
+  import { data, getHandler, syncDate } from './data';
   import Game from './Game.svelte';
+
+  onMount(() => {
+    function interval() {
+      requestAnimationFrame(interval);
+      if (Date.now() - syncDate >= 1800) {
+        getHandler();
+      }
+    }
+
+    interval();
+  });
 </script>
 
 {#if $data}

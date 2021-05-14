@@ -4,6 +4,7 @@ import { generateRandomGame, buildGameConfig } from './utils';
 const GAME_URL = 'https://api.npoint.io/9aa25654a04bb9f8393e';
 const gameId = new URLSearchParams(window.location.search).get('id') || 'main';
 
+let syncDate = Date.now();
 const _data = writable({});
 
 const rawData = derived(_data, ($data) => $data[gameId]);
@@ -12,6 +13,8 @@ const data = derived(rawData, ($rawData) =>
 );
 
 function setData(newData) {
+  syncDate = Date.now();
+
   _data.update((prev) => {
     fetch(GAME_URL, {
       method: 'POST',
@@ -35,6 +38,7 @@ function openWord(index) {
 }
 
 function getHandler() {
+  syncDate = Date.now();
   fetch(GAME_URL)
     .then((j) => j.json())
     .then((json) => {
@@ -47,6 +51,5 @@ function getHandler() {
 }
 
 getHandler();
-setInterval(getHandler, 2000);
 
-export { setData, data, rawData, openWord };
+export { setData, data, rawData, openWord, getHandler, syncDate };

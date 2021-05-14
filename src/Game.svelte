@@ -55,15 +55,15 @@
 
   /* DETAIL */
   .sniper.detail {
-    background-color: rgba(29, 26, 26, 0.6);
+    background-color: rgba(29, 26, 26, 0.25);
     border-color: rgba(29, 26, 26, 1);
   }
 
   .red.detail {
-    background-color: rgba(232, 69, 69, 0.6);
+    background-color: rgba(232, 69, 69, 0.25);
   }
   .blue.detail {
-    background-color: rgba(41, 120, 181, 0.6);
+    background-color: rgba(41, 120, 181, 0.25);
   }
 
   .red.opened {
